@@ -1,0 +1,28 @@
+.heading {
+  background-color: rgb(17, 105, 17);
+  height: 10vh;
+  display: flex;
+  /* flex-direction: column;*/
+  align-items: center;
+  /* justify-content: center;*/
+  color: white;
+  font-size: 1.3rem !important;
+}
+
+.left-panel {
+  height: 90vh;
+  background-color: rgb(17, 105, 17);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center;*/
+}
+
+.right-panel {
+  height: 90vh;
+  display: flex;
+  /* flex-direction: column;*/
+  align-items: center;
+  /* justify-content: center;*/
+}
