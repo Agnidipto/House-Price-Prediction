@@ -10,9 +10,9 @@ function getPredictions(data) {
   // console.log(data);
   var fd = new FormData();
   fd.append('location',data.location);
-  fd.append('bhk',data.bhk);
-  fd.append('bath',data.bath);
-  fd.append('sqft',data.sqft);
+  fd.append('bhk',Math.floor(data.bhk));
+  fd.append('bath',Math.floor(data.bath));
+  fd.append('sqft',Math.floor(data.sqft));
   return axios({
     method: "post",
     url: url + "predict_home_price",
@@ -21,5 +21,9 @@ function getPredictions(data) {
   });
 }
 
+function getLocations() {
+  return axios.get(url+"get_location_names")
+}
+
 export default getPredictions;
-export { loadModel };
+export { loadModel, getLocations };
