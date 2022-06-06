@@ -132,7 +132,7 @@ function Home(props) {
               
               <p>Here's to the links to the Github repos if you want to have a look:</p>
               <br/>
-              <div style={{width:"30%", margin:"auto"}}>
+              <div style={{margin:"auto"}}>
               <a href="https://github.com/agsin/House-Price-Prediction"><p style={{textAlign:"center"}}><i class="fab fa-github fa-lg" ></i> Frontend React Link</p></a>
               <a href="https://github.com/chakiAunkit/House-Price-Prediction"><p style={{textAlign:"center"}}><i class="fab fa-github fa-lg"></i> Backend Flask Link</p></a>
               </div>
