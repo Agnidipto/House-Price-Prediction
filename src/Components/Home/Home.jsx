@@ -38,7 +38,7 @@ function Home(props) {
   };
 
   const [details, setDetails] = useState({
-    location: "Whitefield",
+    location: "whitefield",
     sqft: 1000,
     bath: 2,
     bhk: 3,
@@ -51,21 +51,27 @@ function Home(props) {
   const [result, setResult] = useState("");
 
   const submit = (event) => {
-    event.preventDefault();
-
+    // if(typeof(event.preventDefault)!=="undefined") event.preventDefault();
+    var flag=0;
     Object.keys(details).forEach(function(key) {
-      if(details[key]==="" || !details[key]) {
+      if(details[key]==="" || !details[key] || details[key]<1) {
         setError(true);
-        setErrorMessage("Fields cannot be empty!")
+        setErrorMessage("Please enter valid values!");
+        flag=1;
       }
     })
 
-
-
+    if(flag===0)
     getPredictions(details).then((res) => {
       // console.log(res.data);
-      setResult(res.data.estimated_price);
-      setShow(true);
+      if(!res.data.estimated_price || res.data.estimated_price==="") {
+        setError(true);
+        setErrorMessage("Something went wrong!");
+      }
+      else {
+        setResult(res.data.estimated_price);
+        setShow(true);
+      }
     }).catch( err => {
       console.log(err.message)
       setError(true);
@@ -91,6 +97,20 @@ function Home(props) {
     }
     return "Error";
   }   
+
+  
+  useEffect(() => {
+    const listener = event => {
+      if (event.code === "Enter" || event.code === "NumpadEnter") {
+        // event.preventDefault();
+        submit();
+      }
+    };
+    document.addEventListener("keydown", listener);
+    return () => {
+      document.removeEventListener("keydown", listener);
+    };
+  }, []);
 
   return (
     <>
@@ -174,7 +194,7 @@ function Home(props) {
                         <Form.Control
                           type='number'
                           name='sqft'
-                          placeholder='1500'
+                          placeholder='example: 1500'
                           value={details.sqft}
                           onChange={changeDetails}
                         />
@@ -191,7 +211,7 @@ function Home(props) {
                         <Form.Control
                           type='number'
                           name='bath'
-                          placeholder='2'
+                          placeholder='example: 2'
                           value={details.bath}
                           onChange={changeDetails}
                         />
@@ -203,7 +223,7 @@ function Home(props) {
                         <Form.Control
                           type='number'
                           name='bhk'
-                          placeholder='2'
+                          placeholder='example: 2'
                           value={details.bhk}
                           onChange={changeDetails}
                         />
@@ -212,7 +232,7 @@ function Home(props) {
                   </Row>
                 </Form>
               </div>
-              <Button variant='success' onClick={submit}>
+              <Button variant='success' onClick={submit} type="submit">
                 Get Prediction
               </Button>{" "}
             </div>
@@ -222,8 +242,7 @@ function Home(props) {
           <div style={{ width: "80%", margin: "auto" }}>
             This App and Website was built by 
             <a href="https://www.linkedin.com/in/aunkit-chaki-38807b174/"> Aunkit Chaki</a> and <a href="https://www.linkedin.com/in/agnidipto-sinha/">Agnidipto Sinha</a>.
-            <br/> 
-            Contact us if you need anymore info on the same.
+            
           </div>
         </div>
 
