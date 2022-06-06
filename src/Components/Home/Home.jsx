@@ -174,6 +174,7 @@ function Home(props) {
                 <Form>
                   <Row>
                     <Col sm={12} md={6}>
+                    <Form.Group className='mb-3'>
                     <Form.Label style={{ float: "left" }}>
                           Location
                         </Form.Label>
@@ -185,6 +186,7 @@ function Home(props) {
                       <option disabled>Select the location</option>
                       {locations.map(l => <option value={l} >{capitalize(l)}</option>)}
                     </Form.Select>
+                    </Form.Group>
                     </Col>
                     <Col sm={12} md={6}>
                       <Form.Group className='mb-3'>
